@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import NavigationBar from './components/NavigationBar'
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import HistoryPage from './pages/HistoryPage'
+import LeaderboardPage from './pages/LeaderboardPage'
+import NewGamePage from './pages/NewGamePage'
+import './app.css'
+import Header from './components/Header'
+import { AuthContextProvider } from './context/AuthContext'
+import Protected from './components/Protected'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <AuthContextProvider>
+      <Header />
+      <div className="mainContainer">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/history"
+            element={
+              <Protected>
+                <HistoryPage />
+              </Protected>
+            }
+          />
+          <Route
+            path="/leaderboard"
+            element={
+              <Protected>
+                <LeaderboardPage />
+              </Protected>
+            }
+          />
+          <Route
+            path="/newgame"
+            element={
+              <Protected>
+                <NewGamePage />
+              </Protected>
+            }
+          />
+        </Routes>
+      </div>
+      <NavigationBar />
+    </AuthContextProvider>
+  )
 }
 
-export default App;
+export default App

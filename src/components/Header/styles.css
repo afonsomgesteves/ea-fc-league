@@ -1,0 +1,60 @@
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  gap: 12px;
+  background-color: #deb887;
+}
+
+.headerName{
+  width: 60%;
+  flex-shrink: 0;
+}
+
+.headerLogosWrapper{
+  display: flex;
+}
+
+.header p{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.headerLogo{
+  width: 50%;
+  padding: 0 10px;
+}
+
+.headerLogo:first-child{
+  border-right: 1px solid black;
+}
+
+.header img{
+  width: 100%;
+}
+
+.divider{
+  width: 1px;
+  height: 100%;
+  background-color: black;
+}
+
+.logout{
+  display: flex;
+  gap: 12px;
+}
+
+.logout button{
+  background-color: transparent;
+  border: none;
+  font-size: 12px;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.logout p{
+  font-size: 12px;
+  font-weight: normal;
+}

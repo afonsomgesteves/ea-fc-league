@@ -1,0 +1,49 @@
+.tableContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.tableTop{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tableTop button{
+    width: fit-content;
+}
+
+.tableItems{
+    display: flex;
+    flex-direction: column;
+}
+
+.tableEntry{
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    gap: 12px;
+    padding: 10px;
+}
+
+.tableEntry:last-child {
+    border-bottom: none;
+}
+
+.tableEntry p{
+    margin: 0;
+    font-size: 16px;
+}
+
+.tableEntry p:nth-child(n + 3){
+    width: 20px;
+    text-align: center;
+}
+
+.rank{
+    width: 12px;
+}
+
+.name{
+    flex-grow: 1;
+}

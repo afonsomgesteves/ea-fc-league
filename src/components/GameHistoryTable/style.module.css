@@ -1,0 +1,46 @@
+.tableContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.tableEntry{
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    gap: 12px;
+    padding: 10px;
+}
+
+.tableEntry:last-child {
+    border-bottom: none;
+}
+
+p{
+    margin: 0;
+}
+
+.teams{
+    font-size: 16px;
+}
+
+.date{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.date p{
+    font-size: 12px;
+}
+
+.teams{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+  
+.team{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
