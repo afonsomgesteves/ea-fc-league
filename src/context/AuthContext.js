@@ -35,7 +35,7 @@ export const AuthContextProvider = ({ children }) => {
       if (userDoc.exists()) {
         const userData = userDoc.data()
         return { ...currentUser, name: userData.name }
-      }
+      } else return { ...currentUser, name: currentUser.displayName }
     }
     return null
   }
@@ -55,9 +55,8 @@ export const AuthContextProvider = ({ children }) => {
     if (user) {
       const userRef = doc(firestore, 'players', user.uid)
       const userDoc = await getDoc(userRef)
-
       // If the user document does not exist, create a new one.
-      if (!userDoc.exists) {
+      if (!userDoc.exists()) {
         await setDoc(userRef, PlayerInitStruc(user.displayName, user.email), {
           merge: true,
         })
