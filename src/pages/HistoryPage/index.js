@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
-import GameHistoryTable from '../components/GameHistoryTable'
+import GameHistoryTable from '../../components/GameHistoryTable'
 import { collection, getDocs, query, orderBy } from 'firebase/firestore'
-import { firestore } from '../firebase'
+import { firestore } from '../../firebase'
+import styles from './style.module.css'
 
 export default function HistoryPage() {
   const [games, setGames] = useState([])
@@ -26,8 +27,8 @@ export default function HistoryPage() {
   }, [games])
 
   return (
-    <div>
-      <h1>History</h1>
+    <div className={styles.container}>
+      <h1>Resultados</h1>
       {games && <GameHistoryTable games={games} />}
     </div>
   )

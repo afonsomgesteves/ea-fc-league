@@ -12,37 +12,39 @@ import Protected from './components/Protected'
 function App() {
   return (
     <AuthContextProvider>
-      <Header />
       <div className="mainContainer">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route
-            path="/history"
-            element={
-              <Protected>
-                <HistoryPage />
-              </Protected>
-            }
-          />
-          <Route
-            path="/leaderboard"
-            element={
-              <Protected>
-                <LeaderboardPage />
-              </Protected>
-            }
-          />
-          <Route
-            path="/newgame"
-            element={
-              <Protected>
-                <NewGamePage />
-              </Protected>
-            }
-          />
-        </Routes>
+        <Header />
+        <div className="contentContainer">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/history"
+              element={
+                <Protected>
+                  <HistoryPage />
+                </Protected>
+              }
+            />
+            <Route
+              path="/leaderboard"
+              element={
+                <Protected>
+                  <LeaderboardPage />
+                </Protected>
+              }
+            />
+            <Route
+              path="/newgame"
+              element={
+                <Protected>
+                  <NewGamePage />
+                </Protected>
+              }
+            />
+          </Routes>
+        </div>
+        <NavigationBar />
       </div>
-      <NavigationBar />
     </AuthContextProvider>
   )
 }

@@ -1,0 +1,27 @@
+.homepageContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+button{
+    background-color: #deb887;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 30px;
+    width: fit-content;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.elementContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+h1{
+    margin: 0;
+}

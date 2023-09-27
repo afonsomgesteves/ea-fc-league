@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import NewGameForm from '../components/NewGameForm'
+import NewGameForm from '../../components/NewGameForm'
 import { collection, getDocs } from 'firebase/firestore'
-import { firestore } from '../firebase'
+import { firestore } from '../../firebase'
+import styles from './style.module.css'
 
 export default function NewGamePage() {
   const [players, setPlayers] = useState([])
@@ -18,7 +19,8 @@ export default function NewGamePage() {
   }, [])
 
   return (
-    <div>
+    <div className={styles.container}>
+      <h1>Registar jogo</h1>
       <NewGameForm players={players} />
     </div>
   )

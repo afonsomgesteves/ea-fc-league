@@ -1,3 +1,11 @@
 .mainContainer{
-    padding: 0 24px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.contentContainer{
+    padding: 24px 12px;
+    flex-grow: 1;
+    overflow-y: auto;
 }
