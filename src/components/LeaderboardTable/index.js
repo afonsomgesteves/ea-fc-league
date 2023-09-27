@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react'
 import './styles.css'
+import ReactSelect from 'react-select'
 
 function sortByRatio(players) {
   const pointsPerGame = (p) => p.points / p.gamesPlayed
@@ -16,10 +17,10 @@ const TableHeader = () => {
     <div className="tableEntry">
       <p className="rank">#</p>
       <p className="name">Player Name</p>
-      <p>GP</p>
-      <p>W</p>
+      <p>J</p>
+      <p>V</p>
+      <p>E</p>
       <p>D</p>
-      <p>L</p>
       <p>P</p>
     </div>
   )
@@ -42,7 +43,11 @@ const TableEntry = ({ player, rank }) => {
 export default function LeaderboardTable({ leaderboard }) {
   const [sortingFilter, setSortingFilter] = useState('points')
   const [players, setPlayers] = useState([])
-  const isSortByRatio = sortingFilter === 'ratio'
+
+  const sortingOptions = [
+    { value: 'points', label: 'Pontos' },
+    { value: 'ratio', label: 'Rácio de vitórias' },
+  ]
 
   useEffect(() => {
     if (sortingFilter === 'ratio') {
@@ -56,23 +61,21 @@ export default function LeaderboardTable({ leaderboard }) {
     setPlayers(sortByPoints(leaderboard))
   }, [leaderboard])
 
+  const selectStyles = {
+    control: (styles) => ({ ...styles, width: '200px' }),
+  }
+
   return (
     <div className="tableContainer">
       <div className="tableTop">
-        <p>
-          {isSortByRatio
-            ? 'Sorting by win ratio (points/matches playes)'
-            : 'Sorting by points'}
-        </p>
-        <button
-          onClick={() =>
-            isSortByRatio
-              ? setSortingFilter('points')
-              : setSortingFilter('ratio')
-          }
-        >
-          {isSortByRatio ? 'Sort by points' : 'Sort by Win Ratio'}
-        </button>
+        <p>A ordenar por:</p>
+        <ReactSelect
+          options={sortingOptions}
+          value={sortingOptions.find((c) => c.value === sortingFilter)}
+          defaultValue={sortingOptions[0]}
+          onChange={(e) => setSortingFilter(e.value)}
+          styles={selectStyles}
+        />
       </div>
       <div className="tableItems">
         <TableHeader />
