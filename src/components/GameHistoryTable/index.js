@@ -42,9 +42,9 @@ const TableEntry = ({ game }) => {
   }, [game])
 
   const dateObject = game?.timestamp?.toDate()
-  const date = `${dateObject.getFullYear()}-${
+  const date = `${dateObject.getDate()}/${
     dateObject.getMonth() + 1
-  }-${dateObject.getDate()}`
+  }/${dateObject.getFullYear()}`
   const time = `${dateObject.getHours()}:${dateObject.getMinutes()}`
   return (
     <div className={styles.tableEntry}>
