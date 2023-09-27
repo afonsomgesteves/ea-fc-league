@@ -1,13 +1,14 @@
 .tableContainer{
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .tableEntry{
     display: flex;
     border-bottom: 1px solid lightgray;
     gap: 12px;
-    padding: 10px;
+    padding: 10px 16px 10px 10px;
 }
 
 .tableEntry:last-child {
