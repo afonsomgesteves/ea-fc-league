@@ -3,53 +3,74 @@ import styles from './styles.css'
 import Select from 'react-select'
 import { addGameEntry, updatePlayersStats } from '../../firebase'
 import { useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRemove } from '@fortawesome/free-solid-svg-icons'
 
 const TeamFieldArray = ({ team, control, players }) => {
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     control,
     name: `${team?.value}.players`,
   })
   const playerOptions = players.map((p) => ({
     value: p.id,
-    label: p.name,
+    label: (
+      <div className="playerOption">
+        <p>{p.name}</p>
+        <p>({p.email})</p>
+      </div>
+    ),
   }))
 
   return (
     <div className="team">
       <p className="subtitle">{team?.name}</p>
-      <div className="players">
-        {fields.map((_, index) => (
-          <div key={index}>
-            <p>Player {index + 1}</p>
-            <Controller
-              control={control}
-              name={`${team?.value}.players.${index}.value`}
-              render={({ field: { onChange, value, name, ref } }) => (
-                <>
-                  <Select
-                    ref={ref}
-                    name={name}
-                    options={playerOptions}
-                    value={playerOptions.find((c) => c.value === value)}
-                    onChange={(e) =>
-                      e.value
-                        ? onChange(e.value)
-                        : onChange(e.map((c) => c.value))
-                    }
-                  />
-                </>
-              )}
-            />
-          </div>
-        ))}
-      </div>
+      {fields.length > 0 && (
+        <div className="players">
+          {fields.map((item, index) => (
+            <div key={item?.id} className="playerSelectContainer">
+              <p>Jogador {index + 1}</p>
+              <div className="controllerContainer">
+                <Controller
+                  control={control}
+                  name={`${team?.value}.players.${index}.value`}
+                  render={({ field: { onChange, value, name, ref } }) => (
+                    <>
+                      <Select
+                        ref={ref}
+                        name={name}
+                        options={playerOptions}
+                        className="react-select-container"
+                        value={playerOptions.find((c) => c.value === value)}
+                        onChange={(e) =>
+                          e.value
+                            ? onChange(e.value)
+                            : onChange(e.map((c) => c.value))
+                        }
+                      />
+                    </>
+                  )}
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    console.log(index)
+                    remove(index)
+                  }}
+                >
+                  <FontAwesomeIcon icon={faRemove}></FontAwesomeIcon>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       <button
         type="button"
         onClick={() => {
           append({ value: '' })
         }}
       >
-        Add player
+        Adicionar jogador
       </button>
     </div>
   )
@@ -60,8 +81,8 @@ export default function NewGameForm({ players }) {
   const navigate = useNavigate()
 
   const teams = [
-    { name: 'Team A', value: 'teamA' },
-    { name: 'Team B', value: 'teamB' },
+    { name: 'Equipa A', value: 'teamA' },
+    { name: 'Equipa B', value: 'teamB' },
   ]
 
   const onSubmit = async (data) => {
@@ -75,43 +96,46 @@ export default function NewGameForm({ players }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="formContainer">
-      <h1>Register Game</h1>
-      <div className="teams">
-        {teams.map((team, index) => (
-          <TeamFieldArray
-            players={players}
-            team={team}
-            control={control}
-            key={index}
-          />
-        ))}
-      </div>
-      <div className="scoreContainer">
-        <p className="subtitle">Score</p>
-        <div className="score">
-          <div className="teamScore">
-            <p>{teams[0]?.name}</p>
-            <input
-              type="number"
-              {...register(`${teams[0]?.value}.goals`)}
-            ></input>
+      <div className="innerFormContainer">
+        <div className="teams">
+          {teams.map((team, index) => (
+            <TeamFieldArray
+              players={players}
+              team={team}
+              control={control}
+              key={index}
+            />
+          ))}
+        </div>
+        <div className="scoreContainer">
+          <p className="subtitle">Resultado</p>
+          <div className="score">
+            <div className="teamScore">
+              <p>{teams[0]?.name}</p>
+              <input
+                type="number"
+                {...register(`${teams[0]?.value}.goals`)}
+              ></input>
+            </div>
+            <div className="teamScore">
+              <p>{teams[1]?.name}</p>
+              <input
+                type="number"
+                {...register(`${teams[1]?.value}.goals`)}
+              ></input>
+            </div>
           </div>
-          <div className="teamScore">
-            <p>{teams[1]?.name}</p>
-            <input
-              type="number"
-              {...register(`${teams[1]?.value}.goals`)}
-            ></input>
+        </div>
+        <div className="dateContainer">
+          <p className="subtitle">Data</p>
+          <div className={styles.date}>
+            <input type="datetime-local" {...register('date')}></input>
           </div>
         </div>
       </div>
-      <div className="dateContainer">
-        <p className="subtitle">Date</p>
-        <div className={styles.date}>
-          <input type="datetime-local" {...register('date')}></input>
-        </div>
-      </div>
-      <input type="submit" />
+      <button type="submit" className="submitButton">
+        Registar
+      </button>
     </form>
   )
 }

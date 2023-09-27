@@ -1,8 +1,17 @@
 .formContainer{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    overflow-y: auto;
+    gap: 32px;
+}
+
+.innerFormContainer{
+    display: flex;
+    flex-direction: column;
     gap: 16px;
-    padding: 0 16px;
+    overflow-y: auto;
 }
 
 p{
@@ -19,7 +28,7 @@ p{
 }
 
 .subtitle{
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -31,4 +40,42 @@ p{
 .teamScore{
     display: flex;
     flex-direction: column;
+}
+
+.playerOption p:last-child{
+    font-size: 12px;
+}
+
+.players{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.playerSelectContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.controllerContainer{
+    display: flex;
+    width: 100%;
+    gap: 8px;
+}
+
+.react-select-container{
+    flex-grow: 1;
+}
+
+.controllerContainer button{
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.submitButton{
+    width: 100%;
+    border-radius: 5px;
 }
