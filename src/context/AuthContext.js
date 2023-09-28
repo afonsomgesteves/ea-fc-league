@@ -17,6 +17,9 @@ export const AuthContextProvider = ({ children }) => {
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider()
+    provider.setCustomParameters({
+      hd: 'caixamagica.pt',
+    })
     signInWithPopup(auth, provider)
   }
 
